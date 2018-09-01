@@ -84,7 +84,7 @@ var List = function () {
     this.find2 = function (element) {
         for (var i = 0; i < this.dataStore.length; i++) {
             if (this.dataStore[i] == element) {
-                this.new.getter();
+                this.new.getter()
             } else {
                 console.log("không có tin mà bạn tìm");
             }
@@ -143,15 +143,64 @@ var List = function () {
     };
 };
 
+var CArray = function () {
+    this.dataStore = [];
+    this.pos = 0;
+
+    this.setData = function () {
+        for (var i = 0; i < this.numElements; i++) {
+            this.dataStore[i] = Math.floor(Math.random() * (this.numElements + 1));
+        }
+    };
+
+    this.insert = function (element) {
+        this.dataStore[this.pos++] = element;
+    };
+
+    this.toString = function () {
+        var restr = "";
+        for (var i = 0; i < this.dataStore.length; i++) {
+            restr += "ngày đăng : " + this.dataStore + "<br>"
+            if (i > 0 && i % 10 == 0) {
+                restr += "\n";
+            }
+        }
+        return restr;
+    };
+    this.swap = function (arr, index1, index2) {
+        var temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
+    };
+
+    this.selectionSort = function () {
+        var min, temp;
+        for (var outer = 0; outer <= this.dataStore.length - 2; ++outer) {
+            min = outer;
+            for (var inner = outer + 1; inner <= this.dataStore.length - 1; ++inner) {
+                if (this.dataStore[inner] < this.dataStore[min]) {
+                    min = inner;
+                }
+            }
+            this.swap(this.dataStore, outer, min);
+            document.write(this.toString() + "<br/>");
+        }
+    }
+};
+
 var news = new New();
 var list = new List();
+var sorfs = new CArray();
 news.setList();
 list.setNew(news);
 
 function ter() {
-    list.append(prompt("hãy nhập ngày đăng tin"));
+    var appen = prompt("hãy nhập ngày đăng tin");
     console.log(list.toString());
-    news.setter(prompt("thêm tin tức"));
+    var settr = prompt("thêm tin tức")
+    news.setter(settr);
+    list.append(appen);
+    sorfs.insert(appen, settr);
 }
 
 function getter() {
@@ -166,4 +215,9 @@ function remove() {
 
 function find() {
     list.find2(prompt("hãy nhập ngày đăng tin mà bạn muốn tìm"))
+}
+
+function sorf() {
+    sorfs.setData()
+    sorfs.selectionSort()
 }
