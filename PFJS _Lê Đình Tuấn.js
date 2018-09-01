@@ -15,7 +15,7 @@ var New = function () {
         return this.list;
     };
 
-    this.setter  = function (element) {
+    this.setter = function (element) {
         this.dataStore[this.listSize++] = element;
     };
 
@@ -23,8 +23,24 @@ var New = function () {
         console.log("tin bạn muốn xem là : " + this.toString())
     };
 
-    this.getTer2 = function () {
-        console.log("tin bạn muốn tìm : " + this.toString())
+    this.find = function (element) {
+        for (i = 0; i < this.dataStore.length; i++) {
+            if (this.dataStore[i] == element) {
+                return i;
+            }
+        }
+        return -1;
+    };
+
+    this.remove = function (element) {
+        var fountAT = this.find(element);
+        if (fountAT > -1) {
+            this.dataStore.splice(fountAT, 1);
+            this.delete();
+            console.log("đã xoá tin ")
+        } else {
+            console.log("tin mà bạn muốn xoá không tồn tại")
+        }
     };
 
     this.toString = function () {
@@ -67,8 +83,8 @@ var List = function () {
 
     this.find2 = function (element) {
         for (var i = 0; i < this.dataStore.length; i++) {
-            if (this.dataStore[i] == element){
-                this.new.getTer2();
+            if (this.dataStore[i] == element) {
+                this.new.getter();
             } else {
                 console.log("không có tin mà bạn tìm");
             }
@@ -81,7 +97,7 @@ var List = function () {
             this.dataStore.splice(fountAT, 1);
             this.new.delete();
             console.log("đã xoá tin ")
-        }else {
+        } else {
             console.log("tin mà bạn muốn xoá không tồn tại")
         }
     };
@@ -132,7 +148,7 @@ var list = new List();
 news.setList();
 list.setNew(news);
 
-function ter () {
+function ter() {
     list.append(prompt("hãy nhập ngày đăng tin"));
     console.log(list.toString());
     news.setter(prompt("thêm tin tức"));
@@ -144,6 +160,7 @@ function getter() {
 
 function remove() {
     list.remove(prompt("nhập số thứ tự tin mà bạn muốn xoá"))
+    news.remove(prompt("nhập tin mà bạn muốn xoá"))
 }
 
 
