@@ -165,5 +165,5 @@ function remove() {
 
 
 function find() {
-    list.find2(prompt("ngày đăng tin mà bạn muốn tìm"))
+    list.find2(prompt("hãy nhập ngày đăng tin mà bạn muốn tìm"))
 }
